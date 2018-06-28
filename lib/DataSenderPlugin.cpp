@@ -26,9 +26,4 @@ std::string DataSenderPlugin::GetPluginName() const
   return "DataSenderPlugin";
 }
 
-extern "C" {
-  __declspec(dllexport) DataSenderPlugin* createPlugin()
-  {
-    return new DataSenderPlugin();
-  }
-}
+CREATE_PLUGIN(DataSenderPlugin)
