@@ -30,8 +30,8 @@ int main()
 
   typedef yapi::YAPI* (*CreatePluginFunc)(void);
 
-  SmartLoadLibrary lib1("E:\\Examples\\LoadLibrary\\install\\DataSenderPlugin.dll");
-  SmartLoadLibrary lib2("E:\\Examples\\LoadLibrary\\install\\DataReceiverPlugin.dll");
+  SmartLoadLibrary lib1("DataSenderPlugin.dll");
+  SmartLoadLibrary lib2("DataReceiverPlugin.dll");
   
   if (lib1.libHandle == nullptr) {
     std::cerr << "Failed to load filter1" << std::endl;
