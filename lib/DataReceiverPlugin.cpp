@@ -27,9 +27,4 @@ std::string DataReceiverPlugin::GetPluginName() const
   return "DataReceiverPlugin";
 }
 
-extern "C" {
-  __declspec(dllexport) DataReceiverPlugin* createPlugin()
-  {
-    return new DataReceiverPlugin();
-  }
-}
+CREATE_PLUGIN(DataReceiverPlugin)

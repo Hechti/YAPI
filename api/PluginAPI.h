@@ -149,4 +149,12 @@ namespace yapi
   };
 }
 
+#define CREATE_PLUGIN(classname) \
+  extern "C" { \
+    __declspec(dllexport) classname* createPlugin() \
+    { \
+      return new classname(); \
+    } \
+  }
+
 #endif
