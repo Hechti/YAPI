@@ -4,6 +4,9 @@
 #include <PluginAPI.h>
 using namespace yapi;
 
+#include <thread>
+#include <atomic>
+
 class DataSenderPlugin : public YAPI
 {
 public:
@@ -13,10 +16,15 @@ public:
 public:
   virtual void SampleReceivedEvent(const std::string& pinName, const char*const buffer, const size_t bufferSize) override;
   virtual void Start() override;
+  virtual void Stop() override;
   virtual std::string GetPluginName() const override;
+
+  void SendValue();
 
 private:
   OutputPin m_pin;
+  std::unique_ptr<std::thread> m_sendThread;
+  std::atomic_bool m_stopThread;
 };
 
 #endif
