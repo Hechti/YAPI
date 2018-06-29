@@ -4,7 +4,7 @@
 #include "CyclicPlugin.h"
 using namespace yapi;
 
-class CyclicSenderPlugin : public CyclicPlugin {
+class CyclicSenderPlugin : public yapi::CyclicPlugin {
 public:
     CyclicSenderPlugin();
     virtual ~CyclicSenderPlugin();
