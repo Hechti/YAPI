@@ -2,6 +2,7 @@
 #include <windows.h>
 #include <PluginAPI.h>
 #include <memory>
+#include <chrono>
 
 class SmartLoadLibrary
 {
@@ -65,6 +66,12 @@ int main()
     std::cout << "Exception: " << e.what() << std::endl;
     return 0;
   }
+
+  const std::chrono::high_resolution_clock::time_point startTime = std::chrono::high_resolution_clock::now();
+
+  plugin1->SetStartTime(startTime);
+  plugin2->SetStartTime(startTime);
+  plugin3->SetStartTime(startTime);
 
   plugin1->Start();
   plugin2->Start();
