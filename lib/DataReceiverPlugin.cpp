@@ -15,6 +15,7 @@ void DataReceiverPlugin::SampleReceivedEvent(const std::string& pinName, const c
 {
   const int*const value = reinterpret_cast<const int*const>(buffer);
   std::cout << "Received value: " << *value << std::endl;
+  std::cout << "time since start: " << GetTimeSinceStart() << " [ns]" << std::endl;
 }
 
 void DataReceiverPlugin::Start()

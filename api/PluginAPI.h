@@ -6,6 +6,7 @@
 #include <string>
 #include <exception>
 #include <functional>
+#include <chrono>
 
 // yet another plugin API
 namespace yapi
@@ -16,7 +17,6 @@ namespace yapi
     virtual ~SampleEventHandler() {}
     virtual void SampleReceivedEvent(const std::string& pinName, const char*const buffer, const size_t bufferSize) = 0;
   };
-
 
   class InputPin
   {
@@ -139,6 +139,17 @@ namespace yapi
       GetOutputPin(pinName)->Connect(inputPin);
     }
 
+    void SetStartTime(const std::chrono::high_resolution_clock::time_point& startTime)
+    {
+      m_startTime = startTime;
+    }
+
+    int64_t GetTimeSinceStart() const
+    {
+      const auto duration = std::chrono::high_resolution_clock::now() - m_startTime;
+      return duration.count();
+    }
+
   public:
     virtual void Start() = 0;
     virtual void Stop() = 0;
@@ -147,6 +158,7 @@ namespace yapi
   private:
     InputPinList m_inputPinMap;
     OutputPinList m_outputPinMap;
+    std::chrono::high_resolution_clock::time_point m_startTime;
   };
 }
 
