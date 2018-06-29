@@ -1,10 +1,9 @@
 #include "CyclicSenderPlugin.h"
 
 
-CyclicSenderPlugin::CyclicSenderPlugin() : m_pin("Output"), m_value(1000)
+CyclicSenderPlugin::CyclicSenderPlugin() : CyclicPlugin(std::chrono::milliseconds(100)), m_pin("Output"), m_value(1000)
 {
     RegisterPin(m_pin);
-    SetInterval(std::chrono::milliseconds(500));
 }
 
 CyclicSenderPlugin::~CyclicSenderPlugin()
