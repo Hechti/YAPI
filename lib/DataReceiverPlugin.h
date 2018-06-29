@@ -13,6 +13,7 @@ public:
 public:
   virtual void SampleReceivedEvent(const std::string& pinName, const char*const buffer, const size_t bufferSize) override;
   virtual void Start() override;
+  virtual void Stop() override;
   virtual std::string GetPluginName() const override;
 
 private:

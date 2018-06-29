@@ -141,6 +141,7 @@ namespace yapi
 
   public:
     virtual void Start() = 0;
+    virtual void Stop() = 0;
     virtual std::string GetPluginName() const = 0;
 
   private:

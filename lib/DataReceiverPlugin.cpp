@@ -22,6 +22,11 @@ void DataReceiverPlugin::Start()
 
 }
 
+void DataReceiverPlugin::Stop()
+{
+
+}
+
 std::string DataReceiverPlugin::GetPluginName() const
 {
   return "DataReceiverPlugin";

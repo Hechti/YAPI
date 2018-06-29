@@ -1,6 +1,5 @@
 #include <iostream>
 #include <windows.h>
-#include <functional>
 #include <PluginAPI.h>
 #include <memory>
 
@@ -58,10 +57,14 @@ int main()
     std::cout << "Exception: " << e.what() << std::endl;
     return 0;
   }
-  
-  // Connect(filter2->GetInputPin("Input"), filter1->GetOutputPin("Output"));
+
   plugin1->Start();
   plugin2->Start();
+
+  system("pause");
+
+  plugin1->Stop();
+  plugin2->Stop();
 
   return 0;
 }
