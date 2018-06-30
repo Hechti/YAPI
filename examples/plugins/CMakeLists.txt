@@ -1,0 +1,17 @@
+set(MODULE1 DataSenderPlugin)
+add_library(${MODULE1} SHARED DataSenderPlugin.h DataSenderPlugin.cpp)
+target_link_libraries(${MODULE1} YAPI)
+install(TARGETS ${MODULE1} DESTINATION ${CMAKE_INSTALL_PREFIX}/examples)
+set_property(TARGET ${MODULE1} PROPERTY FOLDER ${FOLDER_NAME})
+
+set(MODULE2 DataReceiverPlugin)
+add_library(${MODULE2} SHARED DataReceiverPlugin.h DataReceiverPlugin.cpp)
+target_link_libraries(${MODULE2} YAPI)
+install(TARGETS ${MODULE2} DESTINATION ${CMAKE_INSTALL_PREFIX}/examples)
+set_property(TARGET ${MODULE2} PROPERTY FOLDER ${FOLDER_NAME})
+
+set(MODULE3 CyclicSenderPlugin)
+add_library(${MODULE3} SHARED CyclicSenderPlugin.h CyclicSenderPlugin.cpp)
+target_link_libraries(${MODULE3} YAPI)
+install(TARGETS ${MODULE3} DESTINATION ${CMAKE_INSTALL_PREFIX}/examples)
+set_property(TARGET ${MODULE3} PROPERTY FOLDER ${FOLDER_NAME})

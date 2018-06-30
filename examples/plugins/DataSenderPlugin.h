@@ -1,7 +1,7 @@
 #ifndef DATA_SENDER_PLUGIN
 #define DATA_SENDER_PLUGIN
 
-#include <PluginAPI.h>
+#include <Yapi.h>
 using namespace yapi;
 
 #include <thread>

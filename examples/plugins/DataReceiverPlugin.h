@@ -1,7 +1,7 @@
 #ifndef DATA_RECEIVER_PLUGIN
 #define DATA_RECEIVER_PLUGIN
 
-#include <PluginAPI.h>
+#include <Yapi.h>
 using namespace yapi;
 
 class DataReceiverPlugin : public YAPI
