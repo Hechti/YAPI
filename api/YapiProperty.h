@@ -8,9 +8,6 @@ namespace yapi {
         ~Property() = default;
 
         nlohmann::json getPluginProperties(std::string name, int instance);
-        
-
-
 
     private:
         nlohmann::json properties;
@@ -26,14 +23,13 @@ namespace yapi {
 
         template<typename Default, typename ...Rest>
         Default getParameter(Default default, Rest... rest) {
-
-            _set_requested_config(default, std::forward<Rest>(rest)...);
+            m_requested_config = merge(m_requested_config, _set_requested_config(default, rest...));
             return _getParameter(default, m_config, rest...);
         }
 
         template<typename ...Rest>
         std::string getParameter(const char* default, Rest... rest) {
-            _set_requested_config(default, std::forward<Rest>(rest)...);
+            m_requested_config = merge(m_requested_config, _set_requested_config(default, rest...));
             return _getParameter(std::string(default), m_config, rest...);
         }
     private:
@@ -54,33 +50,35 @@ namespace yapi {
             }
         }
 
-        template<typename Default, typename Key>
-        void _set_requested_config(Default default, Key key, ...) {
-            va_list args;
-            va_start(args, key);
-
-            while (*fmt != '\0') {
-                if (*fmt == 'd') {
-                    int i = va_arg(args, int);
-                    std::cout << i << '\n';
-                }
-                else if (*fmt == 'c') {
-                    // note automatic conversion to integral type
-                    int c = va_arg(args, int);
-                    std::cout << static_cast<char>(c) << '\n';
-                }
-                else if (*fmt == 'f') {
-                    double d = va_arg(args, double);
-                    std::cout << d << '\n';
-                }
-                ++fmt;
-            }
-
-            va_end(args);
+        template<typename Default, typename Key, typename ...Rest>
+        nlohmann::json _set_requested_config(Default default, Key key, Rest... rest)
+        {
+            nlohmann::json value;
+            value[key] = _set_requested_config(default, rest...);
+            return value;
         }
 
+        template<typename Default>
+        nlohmann::json _set_requested_config(Default default)
+        {
+                return default;
+        }
+
+        // merge function from https://github.com/nlohmann/json/issues/252#issuecomment-222312519
+        nlohmann::json merge(const nlohmann::json &a, const nlohmann::json &b)
+        {
+            nlohmann::json result = a.flatten();
+            nlohmann::json tmp = b.flatten();
+
+            for (nlohmann::json::iterator it = tmp.begin(); it != tmp.end(); ++it)
+            {
+                result[it.key()] = it.value();
+            }
+
+            return result.unflatten();
+        }
     
-    private:
+    public:
         nlohmann::json m_config;
         nlohmann::json m_requested_config;
 
