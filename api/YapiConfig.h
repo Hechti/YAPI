@@ -14,7 +14,6 @@ namespace yapi {
 
         ~Config() = default;
 
-
         template<typename Default, typename ...Rest>
         Default GetParameter(Default default, Rest... rest) {
             m_requested_config = MergeJson(m_requested_config, _SetRequestedConfig(default, rest...));
@@ -26,6 +25,9 @@ namespace yapi {
             m_requested_config = MergeJson(m_requested_config, _SetRequestedConfig(default, rest...));
             return _GetParameter(std::string(default), m_config, rest...);
         }
+
+        nlohmann::json GetRequestedConfig() const;
+
     private:
         template<typename Default, typename Key, typename ...Rest>
         Default _GetParameter(Default default, nlohmann::json content, Key key, Rest... rest) {

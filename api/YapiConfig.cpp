@@ -27,3 +27,8 @@ yapi::Config yapi::Config::FromFile(std::string pluginName, int pluginInstance, 
 
     return Config();
 }
+
+nlohmann::json yapi::Config::GetRequestedConfig() const
+{
+    return m_requested_config;
+}
