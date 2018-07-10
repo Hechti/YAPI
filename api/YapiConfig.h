@@ -2,20 +2,14 @@
 #include <iostream>
 
 namespace yapi {
-    class Property {
-    public:
-        explicit Property(std::string filename);
-        ~Property() = default;
-
-        nlohmann::json GetPluginProperties(std::string name, int instance);
-
-    private:
-        nlohmann::json properties;
-    };
-
 
     class Config {
     public:
+        static yapi::Config FromFile(std::string pluginName, int pluginInstance, std::string filename);
+
+
+    public:
+        Config() { m_config = nlohmann::json(); }
         explicit Config(nlohmann::json config) :m_config (config) {};
 
         ~Config() = default;
