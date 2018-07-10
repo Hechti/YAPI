@@ -20,7 +20,7 @@ yapi::Property::Property(std::string filename)
 }
 
 
-nlohmann::json yapi::Property::getPluginProperties(std::string name, int instance)
+nlohmann::json yapi::Property::GetPluginProperties(std::string name, int instance)
 {
     for (nlohmann::json::iterator it = properties.begin(); it != properties.end(); ++it) {
         std::cout << *it<< std::endl;
