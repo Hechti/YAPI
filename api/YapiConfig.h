@@ -1,12 +1,13 @@
 #include "json/json.hpp"
 #include <iostream>
 
-namespace yapi {
+namespace yapi
+{
 
-    class Config {
+    class Config
+	{
     public:
         static yapi::Config FromFile(std::string pluginName, int pluginInstance, std::string filename);
-
 
     public:
         Config() { m_config = nlohmann::json(); }
@@ -15,13 +16,15 @@ namespace yapi {
         ~Config() = default;
 
         template<typename Default, typename ...Rest>
-        Default GetParameter(Default default, Rest... rest) {
+        Default GetParameter(Default default, Rest... rest)
+		{
             m_requested_config = MergeJson(m_requested_config, _SetRequestedConfig(default, rest...));
             return _GetParameter(default, m_config, rest...);
         }
 
         template<typename ...Rest>
-        std::string GetParameter(const char* default, Rest... rest) {
+        std::string GetParameter(const char* default, Rest... rest)
+		{
             m_requested_config = MergeJson(m_requested_config, _SetRequestedConfig(default, rest...));
             return _GetParameter(std::string(default), m_config, rest...);
         }
@@ -30,13 +33,14 @@ namespace yapi {
 
     private:
         template<typename Default, typename Key, typename ...Rest>
-        Default _GetParameter(Default default, nlohmann::json content, Key key, Rest... rest) {
+        Default _GetParameter(Default default, nlohmann::json content, Key key, Rest... rest)
+		{
                 return _GetParameter(default, content[key], rest...);
-
         };
 
         template<typename Default, typename Key>
-        Default _GetParameter(Default default, nlohmann::json content, Key key) {
+        Default _GetParameter(Default default, nlohmann::json content, Key key)
+		{
             nlohmann::json value = content[key];
             if (value.is_null()) {
                 return default;
@@ -60,20 +64,9 @@ namespace yapi {
             return default;
         }
 
-        // merge function from https://github.com/nlohmann/json/issues/252#issuecomment-222312519
-        nlohmann::json MergeJson(const nlohmann::json &a, const nlohmann::json &b)
-        {
-            nlohmann::json result = a.flatten();
-            nlohmann::json tmp = b.flatten();
-
-            for (nlohmann::json::iterator it = tmp.begin(); it != tmp.end(); ++it)
-            {
-                result[it.key()] = it.value();
-            }
-
-            return result.unflatten();
-        }
-    
+		nlohmann::json MergeJson(const nlohmann::json &a, const nlohmann::json &b);
+ 
+  
     private:
         nlohmann::json m_config;
         nlohmann::json m_requested_config;

@@ -32,3 +32,19 @@ nlohmann::json yapi::Config::GetRequestedConfig() const
 {
     return m_requested_config;
 }
+
+// merge function from https://github.com/nlohmann/json/issues/252#issuecomment-222312519
+nlohmann::json yapi::Config::MergeJson(const nlohmann::json & a, const nlohmann::json & b)
+{
+
+	nlohmann::json result = a.flatten();
+	nlohmann::json tmp = b.flatten();
+
+	for (nlohmann::json::iterator it = tmp.begin(); it != tmp.end(); ++it)
+	{
+		result[it.key()] = it.value();
+	}
+
+	return result.unflatten();
+
+}
