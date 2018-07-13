@@ -6,6 +6,7 @@ set(HDR_FILES
   OutputPin.h
   Yapi.h
   CyclicPlugin.h
+  YapiConfig.h
 )
 
 set(SRC_FILES
@@ -13,10 +14,12 @@ set(SRC_FILES
   OutputPin.cpp
   Yapi.cpp
   CyclicPlugin.cpp
+  YapiConfig.cpp
 )
 
 add_library(${MODULE} ${HDR_FILES} ${SRC_FILES})
 target_include_directories(${MODULE} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(${MODULE} PUBLIC json)
 
 install(TARGETS ${MODULE} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
 install(FILES ${HDR_FILES} DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
