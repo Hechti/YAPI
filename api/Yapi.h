@@ -18,8 +18,8 @@ namespace yapi
   class YAPI : public SampleEventHandler
   {
   public:
-    typedef std::unordered_map<std::string, InputPin*> InputPinList;
-    typedef std::unordered_map<std::string, OutputPin*> OutputPinList;
+    typedef std::unordered_map<std::string, std::reference_wrapper<InputPin>> InputPinList;
+    typedef std::unordered_map<std::string, std::reference_wrapper<OutputPin>> OutputPinList;
 
   public:
     YAPI();
@@ -29,9 +29,9 @@ namespace yapi
     void RegisterPin(OutputPin& pin);
     const InputPinList& GetInputPins() const;
     const OutputPinList& GetOutputPins() const;
-    InputPin* GetInputPin(const std::string& pinName);
-    OutputPin* GetOutputPin(const std::string& pinName);
-    void Connect(const std::string& pinName, InputPin* inputPin);
+    InputPin& GetInputPin(const std::string& pinName);
+    OutputPin& GetOutputPin(const std::string& pinName);
+    void Connect(const std::string& pinName, InputPin& inputPin);
     void SetStartTime(const std::chrono::high_resolution_clock::time_point& startTime);
     int64_t GetTimeSinceStart() const;
 
@@ -45,6 +45,8 @@ namespace yapi
     OutputPinList m_outputPinMap;
     std::chrono::high_resolution_clock::time_point m_startTime;
   };
+
+  void Connect(YAPI* pluginSrc, const std::string& pinSrc, YAPI* pluginDst, const std::string& pinDst);
 }
 
 #define CREATE_PLUGIN(classname) \

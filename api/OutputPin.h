@@ -12,13 +12,13 @@ namespace yapi
   {
   public:
     OutputPin(const std::string& name);
-    void Connect(InputPin* pin);
+    void Connect(InputPin& pin);
     void Transmit(const char*const buffer, const size_t bufferSize);
     const std::string& GetName() const;
 
   private:
     std::string m_name;
-    typedef std::vector<InputPin*> InputPinList;
+    typedef std::vector<std::reference_wrapper<InputPin>> InputPinList;
     InputPinList m_inputPinList;
   };
 }
