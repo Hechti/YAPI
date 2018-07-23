@@ -18,7 +18,7 @@ namespace yapi
 
   private:
     std::string m_name;
-    typedef std::vector<std::reference_wrapper<InputPin>> InputPinList;
+    using InputPinList = std::vector<std::reference_wrapper<InputPin>>;
     InputPinList m_inputPinList;
   };
 }

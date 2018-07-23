@@ -18,8 +18,8 @@ namespace yapi
   class YAPI : public SampleEventHandler
   {
   public:
-    typedef std::unordered_map<std::string, std::reference_wrapper<InputPin>> InputPinList;
-    typedef std::unordered_map<std::string, std::reference_wrapper<OutputPin>> OutputPinList;
+    using InputPinList = std::unordered_map<std::string, std::reference_wrapper<InputPin>>;
+    using OutputPinList = std::unordered_map<std::string, std::reference_wrapper<OutputPin>>;
 
   public:
     YAPI();
