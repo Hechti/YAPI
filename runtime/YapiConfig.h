@@ -16,34 +16,34 @@ namespace yapi
         ~Config() = default;
 
         template<typename Default, typename ...Rest>
-        Default GetParameter(Default default, Rest... rest)
+        Default GetParameter(Default defaultParameter, Rest... rest)
 		{
-            m_requested_config = MergeJson(m_requested_config, _SetRequestedConfig(default, rest...));
-            return _GetParameter(default, m_config, rest...);
+            m_requested_config = MergeJson(m_requested_config, _SetRequestedConfig(defaultParameter, rest...));
+            return _GetParameter(defaultParameter, m_config, rest...);
         }
 
         template<typename ...Rest>
-        std::string GetParameter(const char* default, Rest... rest)
+        std::string GetParameter(const char* defaultParameter, Rest... rest)
 		{
-            m_requested_config = MergeJson(m_requested_config, _SetRequestedConfig(default, rest...));
-            return _GetParameter(std::string(default), m_config, rest...);
+            m_requested_config = MergeJson(m_requested_config, _SetRequestedConfig(defaultParameter, rest...));
+            return _GetParameter(std::string(defaultParameter), m_config, rest...);
         }
 
         nlohmann::json GetRequestedConfig() const;
 
     private:
         template<typename Default, typename Key, typename ...Rest>
-        Default _GetParameter(Default default, nlohmann::json content, Key key, Rest... rest)
+        Default _GetParameter(Default defaultParameter, nlohmann::json content, Key key, Rest... rest)
 		{
-                return _GetParameter(default, content[key], rest...);
+                return _GetParameter(defaultParameter, content[key], rest...);
         };
 
         template<typename Default, typename Key>
-        Default _GetParameter(Default default, nlohmann::json content, Key key)
+        Default _GetParameter(Default defaultParameter, nlohmann::json content, Key key)
 		{
             nlohmann::json value = content[key];
             if (value.is_null()) {
-                return default;
+                return defaultParameter;
             }
             else {
                 return value;
@@ -51,17 +51,17 @@ namespace yapi
         }
 
         template<typename Default, typename Key, typename ...Rest>
-        nlohmann::json _SetRequestedConfig(Default default, Key key, Rest... rest)
+        nlohmann::json _SetRequestedConfig(Default defaultParameter, Key key, Rest... rest)
         {
             nlohmann::json value;
-            value[key] = _SetRequestedConfig(default, rest...);
+            value[key] = _SetRequestedConfig(defaultParameter, rest...);
             return value;
         }
 
         template<typename Default>
-        nlohmann::json _SetRequestedConfig(Default default)
+        nlohmann::json _SetRequestedConfig(Default defaultParameter)
         {
-            return default;
+            return defaultParameter;
         }
 
 		nlohmann::json MergeJson(const nlohmann::json &a, const nlohmann::json &b);
