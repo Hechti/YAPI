@@ -60,14 +60,14 @@ void yapi::Runtime::LoadConfig(const std::string& configPath)
 
   for (auto& element : connections.value()) {
     auto& pluginSrcName = element.find(config::name_src).value();
-    auto& pluginSrc = m_loadedPluginList.find(pluginSrcName);
+    const auto& pluginSrc = m_loadedPluginList.find(pluginSrcName);
     if (pluginSrc == m_loadedPluginList.end()) {
       std::cout << "Unable to find plugin \"" << pluginSrcName << "\"" << std::endl;
       continue;
     }
 
     auto& pluginDstName = element.find(config::name_dst).value();
-    auto& pluginDst = m_loadedPluginList.find(pluginDstName);
+    const auto& pluginDst = m_loadedPluginList.find(pluginDstName);
     if (pluginDst == m_loadedPluginList.end()) {
       std::cout << "Unable to find plugin \"" << pluginDstName << "\"" << std::endl;
       continue;

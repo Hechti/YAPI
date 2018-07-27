@@ -33,7 +33,7 @@ const yapi::YAPI::OutputPinList& yapi::YAPI::GetOutputPins() const
 
 yapi::InputPin& yapi::YAPI::GetInputPin(const std::string& pinName)
 {
-  auto& it = m_inputPinMap.find(pinName);
+  const auto& it = m_inputPinMap.find(pinName);
   if (it == m_inputPinMap.end()) {
     throw std::exception("InputPin not found");
   }
@@ -43,7 +43,7 @@ yapi::InputPin& yapi::YAPI::GetInputPin(const std::string& pinName)
 
 yapi::OutputPin& yapi::YAPI::GetOutputPin(const std::string& pinName)
 {
-  auto& it = m_outputPinMap.find(pinName);
+  const auto& it = m_outputPinMap.find(pinName);
   if (it == m_outputPinMap.end()) {
     throw std::exception("OutputPin not found");
   }
