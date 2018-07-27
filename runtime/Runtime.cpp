@@ -5,18 +5,18 @@
 #include <json/json.hpp>
 
 
-namespace yapi 
+namespace yapi
 {
-  constexpr char*const create_plugin = "createPlugin";
+	constexpr char const* create_plugin = "createPlugin";
 
-  namespace config
-  {
-    constexpr char*const connections = "connections";
-    constexpr char*const name_src = "name_src";
-    constexpr char*const name_dst = "name_dst";
-    constexpr char*const pin_src = "pin_src";
-    constexpr char*const pin_dst = "pin_dst";
-  }
+	namespace config
+	{
+		constexpr char const* connections = "connections";
+		constexpr char const* name_src = "name_src";
+		constexpr char const* name_dst = "name_dst";
+		constexpr char const* pin_src = "pin_src";
+		constexpr char const* pin_dst = "pin_dst";
+	}
 }
 
 typedef yapi::YAPI* (*CreatePluginFunc)(void);
