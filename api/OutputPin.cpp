@@ -2,9 +2,9 @@
 #include "InputPin.h"
 #include "SampleEventHandler.h"
 
-yapi::OutputPin::OutputPin(const std::string& name)
+yapi::OutputPin::OutputPin(const std::string& name) : m_name(name)
 {
-  m_name = name;
+ 
 }
 
 void yapi::OutputPin::Connect(InputPin& pin)

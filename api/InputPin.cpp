@@ -1,9 +1,9 @@
 #include "InputPin.h"
 #include "SampleEventHandler.h"
 
-yapi::InputPin::InputPin(const std::string& name)
+yapi::InputPin::InputPin(const std::string& name) : m_name(name), m_onPinEvent(nullptr)
 {
-  m_name = name;
+ 
 }
 
 void yapi::InputPin::SetSampleEventHandler(SampleEventHandler* event)
