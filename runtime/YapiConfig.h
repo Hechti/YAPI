@@ -7,7 +7,7 @@ namespace yapi
     class Config
 	{
     public:
-        static yapi::Config FromFile(std::string pluginName, int pluginInstance, std::string filename);
+        static yapi::Config FromFile(const std::string& pluginName, int pluginInstance, const std::string& filename);
 
     public:
         Config() { m_config = nlohmann::json(); }

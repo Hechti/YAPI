@@ -2,7 +2,7 @@
 #include <iostream>
 #include <fstream>
 
-yapi::Config yapi::Config::FromFile(std::string pluginName, int pluginInstance, std::string filename)
+yapi::Config yapi::Config::FromFile(const std::string& pluginName, int pluginInstance, const std::string& filename)
 {
     std::ifstream file;
     file.open(filename, std::ios_base::in);
@@ -18,8 +18,6 @@ yapi::Config yapi::Config::FromFile(std::string pluginName, int pluginInstance, 
     }
 
     for (nlohmann::json::iterator it = properties.begin(); it != properties.end(); ++it) {
-        std::cout << *it << std::endl;
-        std::cout << (*it)["name"] << std::endl;
         if ((*it)["name"] == pluginName && (*it)["instance"] == pluginInstance) {
             return Config(*it);
         }
