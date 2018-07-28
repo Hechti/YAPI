@@ -10,7 +10,7 @@ namespace yapi
         static yapi::Config FromFile(const std::string& pluginName, int pluginInstance, const std::string& filename);
 
     public:
-        Config() { m_config = nlohmann::json(); }
+        Config() : m_config(nlohmann::json()) {}
         explicit Config(nlohmann::json config) :m_config (config) {};
 
         ~Config() = default;
