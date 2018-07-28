@@ -19,7 +19,7 @@ namespace yapi
 	}
 }
 
-typedef yapi::YAPI* (*CreatePluginFunc)(void);
+using CreatePluginFunc = yapi::YAPI* (*)(void);
 
 yapi::Runtime::Runtime(const PluginPathList& pluginPathList)
 {
