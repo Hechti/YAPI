@@ -33,6 +33,7 @@ yapi::Runtime::Runtime(const PluginPathList& pluginPathList)
     CreatePluginFunc createPlugin = (CreatePluginFunc)GetProcAddress(handle, yapi::create_plugin);
     if (createPlugin == nullptr) {
       std::cout << "Failed to get address of \"createPlugin\" function of plugin " << pluginName << std::endl;
+	  FreeLibrary(handle);
       continue;
     }
 
