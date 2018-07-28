@@ -39,6 +39,7 @@ yapi::Runtime::Runtime(const PluginPathList& pluginPathList)
     std::shared_ptr<yapi::YAPI> plugin = std::shared_ptr<yapi::YAPI>(createPlugin());
     m_loadedPluginList[plugin->GetPluginName()] = plugin;
     std::cout << "Loaded " << plugin->GetPluginName() << std::endl;
+	FreeLibrary(handle);
   }
 }
 
