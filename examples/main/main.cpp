@@ -28,7 +28,8 @@ int main()
   std::cout << "================YAPI 1================" << std::endl;
   std::cout << "======================================" << std::endl << std::endl;
 
-  typedef yapi::YAPI* (*CreatePluginFunc)(void);
+  //typedef yapi::YAPI* (*CreatePluginFunc)(void);
+  using CreatePluginFunc = yapi::YAPI* (*)();
 
   SmartLoadLibrary lib1("DataSenderPlugin.dll");
   SmartLoadLibrary lib2("DataReceiverPlugin.dll");
